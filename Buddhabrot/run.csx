@@ -16,8 +16,9 @@ public static async Task<HttpResponseMessage> Run(HttpRequestMessage req, TraceW
 
     var stopWatch = new Stopwatch();
     stopWatch.Start();
-    var width = 500;
-    var height = 500;
+    var width = 300;
+    var height = 300;
+    var totalIterations = 2000000;
     Random r = new Random();
 
     using(MemoryStream ms = new MemoryStream()) 
@@ -33,7 +34,7 @@ public static async Task<HttpResponseMessage> Run(HttpRequestMessage req, TraceW
                 var iteration = 0;
                 var max_iteration = 80;
                 List<Tuple<double, double>> points;
-                for (var i = 0; i < 15000000; i++)
+                for (var i = 0; i < totalIterations; i++)
                 {
                     var x0 = r.NextDouble() * 4 - 3;
                     var y0 = r.NextDouble() * 4 - 2;
@@ -54,8 +55,8 @@ public static async Task<HttpResponseMessage> Run(HttpRequestMessage req, TraceW
                     {
                         points.ForEach((point) =>
                         {
-                            var xx = (point.Item1 + 1.9) * 200;
-                            var yy = (point.Item2 + 1.3) * 200;
+                            var xx = (point.Item1 + 2.1) * width/3;
+                            var yy = (point.Item2 + 1.4) * height/3;
     
                             if (xx < width && xx > 0 && yy < height && yy > 0)
                             {
